@@ -1,7 +1,7 @@
 {%if conectado == true%}
-<form hx-get="/home" hx-trigger="submit">
+<!-- <form hx-get="/home" hx-trigger="submit">
     <button type="submit">Ir para posição Home</button>
-</form>
+</form> -->
 <!-- <p hx-get="/posicao_atual" hx-trigger="from:#conectado">Posição atual: </p>
 </div> -->
 <form hx-post="/mover_distancia" hx-trigger="submit" hx-target="#resultado" hx-on::after-request="this.reset()">

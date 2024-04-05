@@ -7,9 +7,6 @@ from dobot import DobotMoves
 
 app = Flask(__name__)
 
-# Banco em memória
-banco = []
-
 db = TinyDB('db.json')
 
 conectado = True
@@ -43,14 +40,14 @@ def retorna_acessos():
 @app.route('/conectar')
 def connect():
     global conectado
-    # print(list_ports.comports())
-    # port = list_ports.comports()[0].device
-    # robo.conectar(port)
+    print(list_ports.comports()[1].device)
+    port = list_ports.comports()[1].device
+    robo.conectar(port)
     conectado=True
     # robot_move()
     db.insert({
     "endereco":str(request.environ['REMOTE_ADDR']),
-    "acao": "Conecta Robô",
+    "acao": "Conecta ao Robô",
     "hora":str(datetime.now()),
     })
     
@@ -87,13 +84,13 @@ def mover_distancia():
     y = request.form['y']
     z = request.form['z']
     r = request.form['r']
-    # robo.mover_distancia(x, y, z, r)
+    robo.mover_distancia(x, y, z, r)
     db.insert({
     "endereco":str(request.environ['REMOTE_ADDR']),
     "metodo": str(request.method),
     "hora":str(datetime.now()),
     "acao": "Moveu o robo",
-    "posicao_atual": "Adicionar posicao do robo",
+    "posicao_atual": "Posição movida: ",
     'x': x,
     'y': y,
     'z': z,
